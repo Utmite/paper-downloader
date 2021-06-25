@@ -1,0 +1,19 @@
+{
+  "name": "paper-downloader",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "rocka.gg#1460",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "colors": "^1.4.0",
+    "inquirer": "^8.1.1",
+    "path": "^0.12.7"
+  },
+  "bin": "./index.js"
+}
