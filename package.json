@@ -1,12 +1,12 @@
 {
-  "name": "paper-downloader",
-  "version": "1.0.0",
-  "description": "",
+  "name": "papermc-downloader",
+  "version": "1.0.5",
+  "description": "A cli for download papermc 1.17, 1.16.5 and 1.15.2",
   "type": "module",
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Utmite/paper-downloader"
+    "url": "git+https://github.com/Utmite/paper-downloader.git"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -19,5 +19,18 @@
     "inquirer": "^8.1.1",
     "path": "^0.12.7"
   },
-  "bin": "./index.js"
+  "bin": {
+    "papermc-downloader": "index.js"
+  },
+  "bugs": {
+    "url": "https://github.com/Utmite/paper-downloader/issues"
+  },
+  "homepage": "https://github.com/Utmite/paper-downloader#readme",
+  "devDependencies": {},
+  "keywords": [
+    "minecraft",
+    "papermc",
+    "download",
+    "cli"
+  ]
 }
