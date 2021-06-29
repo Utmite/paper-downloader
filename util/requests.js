@@ -19,6 +19,8 @@ export async function getVersions({version = "1.17"}){
 
 export async function download({pathStr = "", version = "1.17",relesa, name = `paper-${version}-${relesa}.jar`}){
     if(pathStr.length <= 1) throw new Error("No have a path/s")
+    if(name.length <= 1) name = `paper-${version}-${relesa}.jar`
+    
     let paths = pathStr.split(",")
     let Promises = []
 

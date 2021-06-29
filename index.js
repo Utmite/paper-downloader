@@ -28,12 +28,16 @@ import inquirer  from "inquirer"
         type: 'list',
         message: 'Choose the release: ',
         choices: await paper.getVersions({version: version}),
+      },{
+        name: 'name',
+        type: 'input',
+        message: 'Write the name of file (default: papermc-${version}-${release}.jar): '
       }];
     return inquirer.prompt(qs);   
   };
 
   (async() => {
     const {pathStr, version} = await initParams()
-    const {relesa} = await finalParams(version)
-    paper.download({pathStr,version,relesa})
+    const {relesa,name} = await finalParams(version)
+    paper.download({pathStr,version,relesa,name})
   })();
