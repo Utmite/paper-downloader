@@ -1,10 +1,12 @@
 #!/usr/bin/env node
 
 import * as paper from './util/requests.js'
+import * as dw from './util/downloads'
+
 import './util/getMaxValue.js'
 import inquirer  from "inquirer"
 
-  const initParams = () => {
+  const initParams = async () => {
     const qs = [{
         name: 'pathStr',
         type: 'input',
@@ -13,11 +15,7 @@ import inquirer  from "inquirer"
         name: 'version',
         type: 'list',
         message: 'Choose the version: ',
-        choices: [
-          '1.17',
-          '1.16.5',
-          '1.15.2'
-        ]
+        choices: await paper.getVersionsAvailable()
       }
     ];
     return inquirer.prompt(qs);
@@ -39,5 +37,5 @@ import inquirer  from "inquirer"
   (async() => {
     const {pathStr, version} = await initParams()
     const {relesa,name} = await finalParams(version)
-    paper.download({pathStr,version,relesa,name})
+    dw.download({pathStr,version,relesa,name})
   })();
