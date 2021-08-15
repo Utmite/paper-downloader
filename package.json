@@ -1,6 +1,6 @@
 {
   "name": "papermc-downloader",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "A cli for download papermc 1.17, 1.16.5 and 1.15.2",
   "type": "commonjs",
   "main": "index.js",
