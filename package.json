@@ -1,15 +1,17 @@
 {
   "name": "papermc-downloader",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "A cli for download papermc 1.17, 1.16.5 and 1.15.2",
-  "type": "module",
+  "type": "commonjs",
   "main": "index.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Utmite/paper-downloader.git"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node ./build/index.js",
+    "build": "babel src -d build",
+    "start": "node --experimental-specifier-resolution=node ./src/index.js"
   },
   "author": "rocka.gg#1460",
   "license": "ISC",
@@ -20,13 +22,17 @@
     "path": "^0.12.7"
   },
   "bin": {
-    "papermc-downloader": "index.js"
+    "papermc-downloader": "./build/index.js"
   },
   "bugs": {
     "url": "https://github.com/Utmite/paper-downloader/issues"
   },
   "homepage": "https://github.com/Utmite/paper-downloader#readme",
-  "devDependencies": {},
+  "devDependencies": {
+    "@babel/cli": "^7.14.8",
+    "@babel/core": "^7.15.0",
+    "@babel/preset-env": "^7.15.0"
+  },
   "keywords": [
     "minecraft",
     "papermc",
