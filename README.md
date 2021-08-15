@@ -1,6 +1,6 @@
 # Papermc-downloader
 
-Papermc-downloader is a JS CLI for download papermc 1.17.2 and all versions of Papermc, also download multiples paths.
+Papermc-downloader is a JS CLI for download papermc 1.17.1 and all versions of Papermc, also download multiples paths.
 
 ## Installation
 
