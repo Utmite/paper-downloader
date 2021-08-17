@@ -4,6 +4,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.getVersionsAvailable = getVersionsAvailable;
+exports.getProjectsAvailable = getProjectsAvailable;
 exports.getVersions = getVersions;
 
 var _axios = _interopRequireDefault(require("axios"));
@@ -16,29 +17,32 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
-function getVersionsAvailable() {
+function getVersionsAvailable(_x) {
   return _getVersionsAvailable.apply(this, arguments);
 }
 
 function _getVersionsAvailable() {
-  _getVersionsAvailable = _asyncToGenerator(function* () {
-    var res = yield _axios.default.get(_urls.default.VersionsAvailable);
+  _getVersionsAvailable = _asyncToGenerator(function* (project) {
+    var res = yield _axios.default.get(_urls.default.ProjectsAvailable + "/" + project);
     return res.data.versions.reverse();
   });
   return _getVersionsAvailable.apply(this, arguments);
 }
 
-function verifyVersion(_x) {
-  return _verifyVersion.apply(this, arguments);
+function getProjectsAvailable() {
+  return _getProjectsAvailable.apply(this, arguments);
 }
 
-function _verifyVersion() {
-  _verifyVersion = _asyncToGenerator(function* (version) {
-    if (!version) throw new Error('No version provied');
-    var versions = yield getVersionsAvailable();
-    if (versions.indexOf(version) === -1) throw new Error("This version is not Available");
+function _getProjectsAvailable() {
+  _getProjectsAvailable = _asyncToGenerator(function* () {
+    try {
+      var res = yield _axios.default.get(_urls.default.ProjectsAvailable);
+      return res.data.projects;
+    } catch (err) {
+      console.error(err);
+    }
   });
-  return _verifyVersion.apply(this, arguments);
+  return _getProjectsAvailable.apply(this, arguments);
 }
 
 function getVersions(_x2) {
@@ -48,11 +52,26 @@ function getVersions(_x2) {
 function _getVersions() {
   _getVersions = _asyncToGenerator(function* (_ref) {
     var {
-      version
+      version,
+      project
     } = _ref;
-    verifyVersion(version);
-    var res = yield _axios.default.get("https://papermc.io/api/v2/projects/paper/versions/".concat(version));
+    verifyVersion(version, project);
+    var res = yield _axios.default.get("https://papermc.io/api/v2/projects/".concat(project, "/versions/").concat(version));
     return yield res.data.builds.reverse();
   });
   return _getVersions.apply(this, arguments);
+}
+
+function verifyVersion(_x3, _x4) {
+  return _verifyVersion.apply(this, arguments);
+}
+
+function _verifyVersion() {
+  _verifyVersion = _asyncToGenerator(function* (version, project) {
+    if (!version) throw new Error('No version provied');
+    if (!project) throw new Error('No project provied');
+    var versions = yield getVersionsAvailable(project);
+    if (versions.indexOf(version) === -1) throw new Error("This version is not Available");
+  });
+  return _verifyVersion.apply(this, arguments);
 }

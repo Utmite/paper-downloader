@@ -1,24 +1,35 @@
 import axios from 'axios'
 import links from './urls'
 
-export async function getVersionsAvailable() {
-    let res = await axios.get(links.VersionsAvailable);
+export async function getVersionsAvailable(project) {
+    let res = await axios.get(links.ProjectsAvailable+"/"+project);
     return res.data.versions.reverse();
 }
 
-async function verifyVersion(version){
-    if(!version) throw new Error('No version provied')
+export async function getProjectsAvailable() {
+    try {
+    let res = await axios.get(links.ProjectsAvailable);
+    return res.data.projects
+    }catch (err) {
+        console.error(err)
+    }
+}
 
-    const versions = await getVersionsAvailable()
+export async function getVersions({version,project}){
+    verifyVersion(version,project)
+
+    
+    let res = await axios.get(`https://papermc.io/api/v2/projects/${project}/versions/${version}`);
+
+    return await res.data.builds.reverse()
+}
+
+async function verifyVersion(version,project){
+    if(!version) throw new Error('No version provied')
+    if(!project) throw new Error('No project provied')
+
+    const versions = await getVersionsAvailable(project)
 
     if(versions.indexOf(version) === -1) throw new Error("This version is not Available")
 }
 
-export async function getVersions({version}){
-
-    verifyVersion(version)
-
-    let res = await axios.get(`https://papermc.io/api/v2/projects/paper/versions/${version}`);
-
-    return await res.data.builds.reverse()
-}

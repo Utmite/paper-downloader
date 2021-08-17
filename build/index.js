@@ -19,8 +19,24 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
-var initParams = /*#__PURE__*/function () {
+var choose = /*#__PURE__*/function () {
   var _ref = _asyncToGenerator(function* () {
+    var qs = [{
+      name: 'proyect',
+      type: 'list',
+      message: 'Choose a proyect: ',
+      choices: yield paper.getProjectsAvailable()
+    }];
+    return _inquirer.default.prompt(qs);
+  });
+
+  return function choose() {
+    return _ref.apply(this, arguments);
+  };
+}();
+
+var initParams = /*#__PURE__*/function () {
+  var _ref2 = _asyncToGenerator(function* (proyect) {
     var qs = [{
       name: 'pathStr',
       type: 'input',
@@ -29,51 +45,57 @@ var initParams = /*#__PURE__*/function () {
       name: 'version',
       type: 'list',
       message: 'Choose the version: ',
-      choices: yield paper.getVersionsAvailable()
+      choices: yield paper.getVersionsAvailable(proyect)
     }];
     return _inquirer.default.prompt(qs);
   });
 
-  return function initParams() {
-    return _ref.apply(this, arguments);
+  return function initParams(_x) {
+    return _ref2.apply(this, arguments);
   };
 }();
 
 var finalParams = /*#__PURE__*/function () {
-  var _ref2 = _asyncToGenerator(function* (version) {
+  var _ref3 = _asyncToGenerator(function* (version, proyect) {
     var qs = [{
       name: 'relesa',
       type: 'list',
       message: 'Choose the release: ',
       choices: yield paper.getVersions({
-        version: version
+        version: version,
+        project: proyect
       })
     }, {
       name: 'name',
       type: 'input',
-      message: 'Write the name of file (default: papermc-${version}-${release}.jar): '
+      message: 'Write the name of file (default: ${proyect}-${version}-${release}.jar): '
     }];
     return _inquirer.default.prompt(qs);
   });
 
-  return function finalParams(_x) {
-    return _ref2.apply(this, arguments);
+  return function finalParams(_x2, _x3) {
+    return _ref3.apply(this, arguments);
   };
 }();
 
 _asyncToGenerator(function* () {
   var {
+    proyect
+  } = yield choose();
+  var {
     pathStr,
     version
-  } = yield initParams();
+  } = yield initParams(proyect);
   var {
     relesa,
     name
-  } = yield finalParams(version);
+  } = yield finalParams(version, proyect);
   dw.download({
+    project: proyect,
     pathStr,
     version,
     relesa,
-    name
+    name,
+    proyect
   });
 })();
