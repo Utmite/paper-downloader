@@ -1,6 +1,6 @@
 {
   "name": "papermc-downloader",
-  "version": "1.3.2",
+  "version": "1.3.3",
   "description": "A cli for download all files of papermc Paper 1.17, Waterfall and Travertine",
   "type": "commonjs",
   "main": "index.js",
@@ -41,7 +41,7 @@
     "Waterfall",
     "Travertine",
     "papermc-downloader",
-    "1.17.1",
+    "1.18.1",
     ".jar"
   ]
 }
