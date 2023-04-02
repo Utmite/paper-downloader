@@ -3,6 +3,7 @@ import links from './urls.mjs'
 
 export async function getVersionsAvailable(project) {
     let res = await axios.get(links.ProjectsAvailable+"/"+project);
+
     return res.data.versions.reverse();
 }
 
