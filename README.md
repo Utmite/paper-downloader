@@ -19,7 +19,7 @@ papermc-downloader
 ```
 
 ```bash
-papermc-downloader --proyect mi_proyecto --pathStr path1,path2 --version 1.0.0 --relesa release1 --name mi_archivo.jar
+papermc-downloader --proyect <proyect> --pathStr path1 --version <version> --release <release> --name <name>
 ```
 
 
