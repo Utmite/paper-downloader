@@ -7,7 +7,7 @@ import commander from 'commander'
 
 commander
   .option('-p, --proyect <proyect>', 'Specify the project')
-  .option('-pa, --pathStr <pathStr>', 'Specify the paths separated by comma')
+  .option('-P, --pathStr <pathStr>', 'Specify the paths separated by comma')
   .option('-v, --version <version>', 'Specify the version')
   .option('-r, --release <release>', 'Specify the release')
   .option('-n, --name <name>', 'Specify the name of the file')
