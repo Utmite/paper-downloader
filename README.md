@@ -18,6 +18,8 @@ Execute the command and enter the requested data
 papermc-downloader
 ```
 
+Or you can use (recommended for bash files or alias)
+
 ```bash
 papermc-downloader --proyect <proyect> --pathStr path1 --version <version> --release <release> --name <name>
 ```
