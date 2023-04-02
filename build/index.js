@@ -9,6 +9,8 @@ require("./util/getMaxValue.js");
 
 var _inquirer = _interopRequireDefault(require("inquirer"));
 
+var _commander = _interopRequireDefault(require("commander"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -19,6 +21,8 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
+_commander.default.option('-p, --proyect <proyect>', 'Specify the project').option('-pa, --pathStr <pathStr>', 'Specify the paths separated by comma').option('-v, --version <version>', 'Specify the version').option('-r, --release <release>', 'Specify the release').option('-n, --name <name>', 'Specify the name of the file').parse(process.argv);
+
 var choose = /*#__PURE__*/function () {
   var _ref = _asyncToGenerator(function* () {
     var qs = [{
@@ -27,7 +31,9 @@ var choose = /*#__PURE__*/function () {
       message: 'Choose a proyect: ',
       choices: yield paper.getProjectsAvailable()
     }];
-    return _inquirer.default.prompt(qs);
+    return _commander.default.proyect ? {
+      proyect: _commander.default.proyect
+    } : _inquirer.default.prompt(qs);
   });
 
   return function choose() {
@@ -47,7 +53,10 @@ var initParams = /*#__PURE__*/function () {
       message: 'Choose the version: ',
       choices: yield paper.getVersionsAvailable(proyect)
     }];
-    return _inquirer.default.prompt(qs);
+    return _commander.default.pathStr && _commander.default.version ? {
+      pathStr: _commander.default.pathStr,
+      version: _commander.default.version
+    } : _inquirer.default.prompt(qs);
   });
 
   return function initParams(_x) {
@@ -58,7 +67,7 @@ var initParams = /*#__PURE__*/function () {
 var finalParams = /*#__PURE__*/function () {
   var _ref3 = _asyncToGenerator(function* (version, proyect) {
     var qs = [{
-      name: 'relesa',
+      name: 'release',
       type: 'list',
       message: 'Choose the release: ',
       choices: yield paper.getVersions({
@@ -70,7 +79,10 @@ var finalParams = /*#__PURE__*/function () {
       type: 'input',
       message: 'Write the name of file (default: ${proyect}-${version}-${release}.jar): '
     }];
-    return _inquirer.default.prompt(qs);
+    return _commander.default.release && _commander.default.name ? {
+      release: _commander.default.release,
+      name: _commander.default.name
+    } : _inquirer.default.prompt(qs);
   });
 
   return function finalParams(_x2, _x3) {
@@ -87,14 +99,14 @@ _asyncToGenerator(function* () {
     version
   } = yield initParams(proyect);
   var {
-    relesa,
+    release,
     name
   } = yield finalParams(version, proyect);
   dw.download({
     project: proyect,
     pathStr,
     version,
-    relesa,
+    release,
     name,
     proyect
   });

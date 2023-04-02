@@ -7,16 +7,16 @@ const dirname = fs.realpathSync('.');
 const PREFIX = "[Paper-Downloader] ->".bgWhite.black.italic
 
 
-export async function download({pathStr = "",project="paper" ,version = "1.17",relesa, name = `paper-${version}-${relesa}.jar`}){
+export async function download({pathStr = "",project="paper" ,version = "1.17",release, name = `paper-${version}-${release}.jar`}){
     if(pathStr.length <= 0) throw new Error("No have a path/s")
-    if(name.length <= 1) name = `${project}-${version}-${relesa}.jar`
+    if(name.length <= 1) name = `${project}-${version}-${release}.jar`
     
     let paths = pathStr.split(",")
     let promises = []
 
     console.log("          NOT CLOSE          ".bgYellow.red.bold)
 
-    createFiles(project, version, relesa, paths, name, promises)
+    createFiles(project, version, release, paths, name, promises)
 
     return promises
 }
@@ -26,14 +26,14 @@ async function getLinkDownload(project, version, release){
     return `https://papermc.io/api/v2/projects/${project}/versions/${version}/builds/${release}/downloads/${project}-${version}-${release}.jar`
 }
 
-async function createFiles(project, version, relesa, paths, name, promises){
+async function createFiles(project, version, release, paths, name, promises){
     for(let i = 0; i < paths.length; i++) {
         
         const sym = path.resolve(dirname, paths[i], name)
 
         let writer = await createWriteStream(sym)
 
-        let res = await getStreamPaper(project,version, relesa)
+        let res = await getStreamPaper(project,version, release)
 
         await res.data.pipe(writer)
         console.log(PREFIX+` The N-${i+1} is starting download`.green)
@@ -52,9 +52,9 @@ async function createWriteStream(sym) {
     return writer;
 }
 
-async function getStreamPaper(project,version, relesa){
+async function getStreamPaper(project,version, release){
     let res = await axios({
-        url: await getLinkDownload(project,version,relesa),
+        url: await getLinkDownload(project,version,release),
         method: "GET",
         onDownloadProgress: (evt) => {
             console.log("hola")
