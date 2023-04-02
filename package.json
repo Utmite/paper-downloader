@@ -1,7 +1,7 @@
 {
   "name": "papermc-downloader",
-  "version": "1.3.19.0",
-  "description": "A cli for download all files of papermc from Paper 1.8.8 to 1.19.x , Waterfall, Travertine and Velocity.",
+  "version": "1.4.0.0",
+  "description": "A cli for download all files of papermc from Paper 1.8.8 to 1.19.x , Waterfall, Travertine, Velocity and Folia.",
   "type": "module",
   "main": "index.js",
   "repository": {
@@ -9,9 +9,8 @@
     "url": "git+https://github.com/Utmite/paper-downloader.git"
   },
   "scripts": {
-    "test": "node ./build/index.js",
     "build": "babel src -d build",
-    "start": "node --experimental-specifier-resolution=node ./src/index.js"
+    "start": "node ./src/index.mjs"
   },
   "author": "rocka.gg#1460",
   "license": "ISC",
@@ -22,7 +21,7 @@
     "path": "^0.12.7"
   },
   "bin": {
-    "papermc-downloader": "./build/index.js"
+    "papermc-downloader": "./src/index.mjs"
   },
   "bugs": {
     "url": "https://github.com/Utmite/paper-downloader/issues"
@@ -31,6 +30,7 @@
   "devDependencies": {
     "@babel/cli": "^7.14.8",
     "@babel/core": "^7.15.0",
+    "@babel/node": "^7.20.7",
     "@babel/preset-env": "^7.15.0"
   },
   "keywords": [
@@ -43,6 +43,7 @@
     "Velocity",
     "papermc-downloader",
     "1.19.x",
-    ".jar"
+    ".jar",
+    "Folia"
   ]
 }
