@@ -1,11 +1,11 @@
 #!/usr/bin/env node
 
-import * as paper from './util/requests.js'
-import * as dw from './util/downloads.js'
+import * as paper from './util/requests.mjs'
+import * as dw from './util/downloads.mjs'
 import inquirer  from "inquirer"
-import commander from 'commander'
+import {program} from "commander"
 
-commander
+program
   .option('-p, --proyect <proyect>', 'Specify the project', null)
   .option('-P, --pathStr <pathStr>', 'Specify the paths separated by comma', null)
   .option('-v, --version <version>', 'Specify the version, you can use: -r lasted', null)
@@ -13,11 +13,13 @@ commander
   .option('-n, --name <name>', 'Specify the name of the file', null)
   .parse(process.argv)
 
+  const options = program.opts();
+
 const choose = async () => {
   let proyect
 
-  if (commander.proyect){
-    proyect = commander.proyect
+  if (options.proyect){
+    proyect = options.proyect
   } else {
     const qs = [{
       name: 'proyect',
@@ -34,8 +36,8 @@ const choose = async () => {
 
 const initPathStr = async () => {
   let pathStr;
-  if (commander.pathStr) {
-    pathStr = commander.pathStr;
+  if (options.pathStr) {
+    pathStr = options.pathStr;
   } else {
     const qs = [{
       name: 'pathStr',
@@ -50,14 +52,14 @@ const initPathStr = async () => {
 
 const initVersion = async (proyect) => {
   let version;
-  if (commander.version) {
+  if (options.version) {
 
-      if(commander.version == "lasted"){
+      if(options.version == "lasted"){
         let aux  = await paper.getVersionsAvailable(proyect)
         version = aux[0]
         
       }else{
-        version = commander.version;
+        version = options.version;
       }
     } else {
 
@@ -78,16 +80,16 @@ const initVersion = async (proyect) => {
 
 const getRelease = async (version, proyect) => {
   let release;
-  if (commander.release) {
+  if (options.release) {
 
-    if(commander.release == "lasted"){
+    if(options.release == "lasted"){
 
       let aux  = await paper.getVersions({version: version ,project: proyect})
       
       release = aux[0]
       
     }else{
-      release = commander.release;
+      release = options.release;
     }
   } else {
     const qs = [{
@@ -105,8 +107,8 @@ const getRelease = async (version, proyect) => {
 
 const getName = async (proyect, version, release) => {
   let name;
-  if (commander.name) {
-    name = commander.name;
+  if (options.name) {
+    name = options.name;
   } else {
     const qs = [{
         name: 'name',
