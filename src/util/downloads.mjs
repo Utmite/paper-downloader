@@ -25,6 +25,7 @@ export async function download({pathStr, proyect, version, release, name}){
 }
 
 async function getLinkDownload(proyect, version, release){
+    
     console.log(PREFIX+` Get Files from: https://papermc.io/api/v2/projects/${proyect}/versions/${version}/builds/${release}/downloads/${proyect}-${version}-${release}.jar`.green)
     return `https://papermc.io/api/v2/projects/${proyect}/versions/${version}/builds/${release}/downloads/${proyect}-${version}-${release}.jar`
 }

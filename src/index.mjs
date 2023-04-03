@@ -8,8 +8,8 @@ import commander from 'commander'
 commander
   .option('-p, --proyect <proyect>', 'Specify the project', null)
   .option('-P, --pathStr <pathStr>', 'Specify the paths separated by comma', null)
-  .option('-v, --version <version>', 'Specify the version', null)
-  .option('-r, --release <release>', 'Specify the release', null)
+  .option('-v, --version <version>', 'Specify the version, you can use: -r lasted', null)
+  .option('-r, --release <release>', 'Specify the release, you can use: -r lasted', null)
   .option('-n, --name <name>', 'Specify the name of the file', null)
   .parse(process.argv)
 
@@ -51,8 +51,15 @@ const initPathStr = async () => {
 const initVersion = async (proyect) => {
   let version;
   if (commander.version) {
-    version = commander.version;
-  } else {
+
+      if(commander.version == "lasted"){
+        let aux  = await paper.getVersionsAvailable(proyect)
+        version = aux[0]
+        
+      }else{
+        version = commander.version;
+      }
+    } else {
 
     const choices = await paper.getVersionsAvailable(proyect);
 
@@ -72,7 +79,16 @@ const initVersion = async (proyect) => {
 const getRelease = async (version, proyect) => {
   let release;
   if (commander.release) {
-    release = commander.release;
+
+    if(commander.release == "lasted"){
+
+      let aux  = await paper.getVersions({version: version ,project: proyect})
+      
+      release = aux[0]
+      
+    }else{
+      release = commander.release;
+    }
   } else {
     const qs = [{
         name: 'release',
