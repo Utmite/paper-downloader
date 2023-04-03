@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
-import * as paper from './util/requests.mjs'
-import * as dw from './util/downloads.mjs'
+import * as paper from './util/requests.js'
+import * as dw from './util/downloads.js'
 import inquirer  from "inquirer"
 import commander from 'commander'
 

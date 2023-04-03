@@ -1,5 +1,5 @@
 import axios from 'axios'
-import links from './urls.mjs'
+import links from './urls.js'
 
 export async function getVersionsAvailable(project) {
     let res = await axios.get(links.ProjectsAvailable+"/"+project);
