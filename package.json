@@ -10,7 +10,9 @@
   },
   "scripts": {
     "build": "babel src -d build",
-    "start": "node ./src/index.mjs"
+    "start": "node ./src/index.js",
+    "test": "node ./build/index.js"
+
   },
   "author": "rocka.gg#1460",
   "license": "ISC",
@@ -21,7 +23,7 @@
     "path": "^0.12.7"
   },
   "bin": {
-    "papermc-downloader": "node build/index.js"
+    "papermc-downloader": "node ./build/index.js"
   },
   "bugs": {
     "url": "https://github.com/Utmite/paper-downloader/issues"
