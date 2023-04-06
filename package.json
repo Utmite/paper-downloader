@@ -9,9 +9,8 @@
     "url": "git+https://github.com/Utmite/paper-downloader.git"
   },
   "scripts": {
-    "build": "babel src -d build",
-    "start": "node ./src/index.js",
-    "test": "node ./build/index.js"
+    "start": "node ./src/index.mjs",
+    "test": "node ./src/index.mjs"
   },
   "author": "rocka.gg#1460",
   "license": "ISC",
