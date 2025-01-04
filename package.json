@@ -1,6 +1,6 @@
 {
   "name": "papermc-downloader",
-  "version": "1.6.1",
+  "version": "1.6.2",
   "description": "A cli for download all files of papermc from PaperMC, Waterfall, Travertine, Velocity and Folia.",
   "type": "module",
   "main": "index.js",
