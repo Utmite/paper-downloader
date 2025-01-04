@@ -20,7 +20,7 @@ export async function getVersions({version,project}){
     verifyVersion(version,project)
 
     
-    let res = await axios.get(`https://papermc.io/api/v2/projects/${project}/versions/${version}`);
+    let res = await axios.get(`https://api.papermc.io/api/v2/projects/${project}/versions/${version}`);
 
     return await res.data.builds.reverse()
 }
