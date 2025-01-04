@@ -1,6 +1,6 @@
 # Papermc-downloader
 
-Papermc-downloader is a CLI tool written in JavaScript that allows you to easily download Papermc versions, including the latest release, for Minecraft 1.19.x. You can also download multiple versions and specify the output path.
+Papermc-downloader is a CLI tool written in JavaScript that allows you to easily download Papermc versions, including the latest release. You can also download multiple versions and specify the output path.
 
 ## Installation
 
