@@ -1,6 +1,6 @@
 {
   "name": "@utmite/papermc-downloader",
-  "version": "1.7.0",
+  "version": "1.7.2",
   "description": "A cli for download all files of papermc from PaperMC, Waterfall, Travertine, Velocity and Folia.",
   "type": "module",
   "main": "index.js",
@@ -23,7 +23,7 @@
     "path": "^0.12.7"
   },
   "bin": {
-    "papermc-downloader": "./src/index.mjs"
+    "papermc-downloader": "src/index.mjs"
   },
   "bugs": {
     "url": "https://github.com/Utmite/paper-downloader/issues"
